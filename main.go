@@ -33,7 +33,7 @@ func process(text string) (result string, err error) {
 
 	answerf64 := calc.Solve(text)
 	var x int = int(answerf64)
-	return fmt.Sprintf("%%v = %v\n%%d = %d, %%b = %b, %%o = %o, %%x = %x, %%U = %U ", answerf64, x, x, x, x, x), nil
+	return fmt.Sprintf("%%v = %v\n%%d = %d, %%b = %b, %%o = %o, %%x = %x, %%U = %U\n", answerf64, x, x, x, x, x), nil
 }
 
 func top(w http.ResponseWriter, r *http.Request) (int, string) {
@@ -42,10 +42,12 @@ func top(w http.ResponseWriter, r *http.Request) (int, string) {
 		return 200, HELP
 	}
 
+	fmt.Println("received: " + text)
 	result, err := process(text)
 	if err != nil {
 		return 500, err.Error();
 	}
 
+	fmt.Println("result: " + result)
 	return 200, result
 }
