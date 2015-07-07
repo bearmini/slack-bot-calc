@@ -49,5 +49,5 @@ func top(w http.ResponseWriter, r *http.Request) (int, string) {
 	}
 
 	fmt.Println("result: " + result)
-	return 200, result
+	return 200, text + " =\n" + result
 }
