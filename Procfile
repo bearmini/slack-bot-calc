@@ -1,1 +1,1 @@
-web: oguma
+web: slack-bot-calc
