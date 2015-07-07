@@ -6,6 +6,7 @@ import (
 
 func main() {
 	m := martini.Classic()
+	m.Get("/", top)
 	m.Post("/", top)
 	m.Run()
 }
