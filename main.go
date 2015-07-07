@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"github.com/go-martini/martini"
 )
 
@@ -11,6 +12,17 @@ func main() {
 	m.Run()
 }
 
-func top(params martini.Params) (int, string) {
-	return 200, "Hello!"
+func top(w http.ResponseWriter, r *http.Request) (int, string) {
+	if err := r.ParseForm(); err != nil {
+		return 500, "Need parameters";
+	}
+
+	result := ""
+	for k, v := range r.Form {
+		for _, s := range v {
+			result += k + ": " + s + "\n"
+		}
+	}
+
+	return 200, result
 }
